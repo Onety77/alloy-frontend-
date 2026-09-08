@@ -1,70 +1,173 @@
-/* The room the interface sits in. Everything here is decorative and inert. */
+/* ============================================================
+   The room the interface sits in. Decorative and inert.
+
+   Built as architecture rather than a wash: a coursed stone wall
+   broken by riveted iron columns, with a recessed arch that gives
+   the fire something to come out of. Lit from two sources that
+   disagree — cold daylight falling from high windows, warm forge
+   light climbing from the floor — which is what keeps the middle
+   of the frame from flattening into a single gradient.
+   ============================================================ */
 .backdrop {
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
-  background:
-    radial-gradient(120% 80% at 50% 118%, rgb(122 38 8 / 0.5) 0%, transparent 62%),
-    radial-gradient(90% 60% at 50% -10%, rgb(40 34 52 / 0.55) 0%, transparent 70%),
-    linear-gradient(180deg, #0a0a0e 0%, #08080b 45%, #050506 100%);
+  /* Base is cold and almost black. Every warm value is added by a
+     light layer, never baked into the substrate. */
+  background: linear-gradient(180deg, #0a0a0f 0%, #08080c 55%, #060608 100%);
 }
 
-/* Far wall. The optional generated plate lands on top of this and inherits
-   the same mask, so the composition holds either way. */
+/* --- far wall: coursed ashlar -------------------------------- */
 .backdrop__wall {
   position: absolute;
   inset: 0;
-  background-image: var(--tx-scorch), var(--tx-iron);
-  background-size: 900px 900px, 320px 320px;
-  opacity: 0.4;
-  mix-blend-mode: overlay;
+  background-image: var(--tx-masonry);
+  background-size: 480px 288px;
 }
-.backdrop__plate {
-  position: absolute;
-  inset: 0;
-  background-image: var(--tx-plate, none);
-  background-size: cover;
-  background-position: center;
-  opacity: 0.32;
-  mix-blend-mode: soft-light;
-}
-
-/* The forge itself, glowing off the bottom edge of the room. */
-.backdrop__hearth {
-  position: absolute;
-  left: 50%;
-  bottom: -22vh;
-  width: min(1500px, 130vw);
-  height: 62vh;
-  translate: -50% 0;
-  background: radial-gradient(
-    closest-side,
-    rgb(255 168 77 / 0.34) 0%,
-    rgb(242 81 11 / 0.2) 38%,
-    rgb(124 31 8 / 0.09) 62%,
-    transparent 78%
-  );
-  filter: blur(14px);
-  animation: forge-flicker 7s ease-in-out infinite;
-}
-
-.backdrop__embers { position: absolute; inset: 0; }
-
-/* Grain over the whole room, last, so nothing escapes it. */
-.backdrop__grain {
+/* Stone grain over the joints so the blocks are not flat fills. */
+.backdrop__wall::after {
+  content: '';
   position: absolute;
   inset: 0;
   background-image: var(--tx-grain);
   background-size: 180px 180px;
-  opacity: 0.05;
+  opacity: 0.3;
   mix-blend-mode: overlay;
 }
 
-/* Corner darkening keeps the eye on the middle third. */
+/* --- structural ironwork ------------------------------------- */
+.backdrop__columns {
+  position: absolute;
+  inset: 0;
+  background-image: var(--tx-column);
+  background-size: 520px 160px;
+  background-repeat: repeat;
+  opacity: 0.8;
+}
+
+/* --- the forge alcove ---------------------------------------- */
+/* A recess cut into the wall. The fire lives inside it, so the light
+   below has an object it is coming out of instead of hanging in air. */
+.backdrop__alcove {
+  position: absolute;
+  left: 50%;
+  bottom: -10vh;
+  width: min(1120px, 94vw);
+  height: 54vh;
+  translate: -50% 0;
+  border-radius: 50% 50% 0 0 / 44% 44% 0 0;
+  /* Only slightly darker than the wall; the depth comes from the inset
+     shadow, not from painting a black dome over the masonry. */
+  /* A recess, not a hole: the interior stays readable so the masonry and
+     firelight inside it are still visible. */
+  background: rgb(4 4 7 / 0.5);
+  box-shadow:
+    inset 0 0 110px 24px rgb(0 0 0 / 0.62),
+    0 -1px 0 0 rgb(28 28 36);
+}
+/* Warm rim where firelight catches the arch edge. Masked so it only
+   appears low down, near the source. */
+.backdrop__alcove::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  border: 1px solid rgb(186 88 30 / 0.34);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 18%, #000 78%);
+  mask-image: linear-gradient(to bottom, transparent 18%, #000 78%);
+}
+
+/* --- warm source: the fire ----------------------------------- */
+/* Three offset pools rather than one centred ellipse. The asymmetry is
+   the point — a single symmetric radial is what reads as a sunset. */
+.backdrop__firelight {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 19% 25% at 43% 88%, rgb(255 192 108 / 0.4), transparent 62%),
+    radial-gradient(ellipse 25% 19% at 58% 94%, rgb(233 102 32 / 0.34), transparent 66%),
+    radial-gradient(ellipse 48% 28% at 50% 101%, rgb(152 52 16 / 0.3), transparent 72%),
+    /* Faint bounce carrying warmth up the wall, so the cold and warm
+       sources actually meet instead of splitting the frame in half. */
+    radial-gradient(ellipse 66% 40% at 50% 84%, rgb(120 52 20 / 0.16), transparent 70%);
+  /* Masked by gentle noise: the light varies across the wall the way real
+     firelight does, without a separate grey layer reading as smoke. */
+  -webkit-mask-image: var(--tx-haze);
+  mask-image: var(--tx-haze);
+  -webkit-mask-size: 620px 620px;
+  mask-size: 620px 620px;
+  animation: forge-flicker 6.5s ease-in-out infinite;
+}
+
+/* --- cold source: high windows -------------------------------- */
+/* Hard-edged shafts, all parallel because they come from one bank of
+   windows. Edges stay defined; only the body is softened. */
+.backdrop__shafts {
+  position: absolute;
+  inset: 0;
+  opacity: 0.55;
+}
+.backdrop__shaft {
+  position: absolute;
+  top: -12%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(
+    to bottom,
+    rgb(186 216 240 / 0.15) 0%,
+    rgb(150 192 224 / 0.07) 42%,
+    transparent 84%
+  );
+  filter: blur(5px);
+}
+.backdrop__shaft--a { clip-path: polygon(6% 0%, 17% 0%, 45% 100%, 31% 100%); }
+.backdrop__shaft--b { clip-path: polygon(20% 0%, 25% 0%, 53% 100%, 47% 100%); }
+.backdrop__shaft--c { clip-path: polygon(64% 0%, 79% 0%, 100% 100%, 88% 100%); opacity: 0.7; }
+
+/* --- soot ------------------------------------------------------ */
+/* Accumulated grime at the edges. Noise-shaped, so the frame darkens
+   unevenly the way a dirty room does, not on a smooth vignette ramp. */
+/* Soot: grime shaped by noise, confined to the edges.
+   The two masks are composed by nesting rather than `mask-composite`,
+   which is not universally supported — and where it is ignored the two
+   mask layers would combine as a union and black out the frame. A parent
+   mask clipping a masked child works everywhere. */
+.backdrop__soot {
+  position: absolute;
+  inset: 0;
+  -webkit-mask-image: radial-gradient(126% 102% at 50% 40%, transparent 30%, #000 100%);
+  mask-image: radial-gradient(126% 102% at 50% 40%, transparent 30%, #000 100%);
+}
+.backdrop__soot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #000;
+  opacity: 0.72;
+  -webkit-mask-image: var(--tx-scorch);
+  mask-image: var(--tx-scorch);
+  -webkit-mask-size: 900px 900px;
+  mask-size: 900px 900px;
+}
+
+.backdrop__embers { position: absolute; inset: 0; }
+
+/* Grain over everything, last. Also dithers the light layers. */
+.backdrop__grain {
+  position: absolute;
+  inset: 0;
+  background-image: var(--tx-grain);
+  background-size: 170px 170px;
+  opacity: 0.075;
+  mix-blend-mode: overlay;
+}
+
+/* A last, gentle corner darkening to hold the eye centre-frame. */
 .backdrop__vignette {
   position: absolute;
   inset: 0;
-  background: radial-gradient(120% 95% at 50% 45%, transparent 42%, rgb(0 0 0 / 0.72) 100%);
+  background: radial-gradient(124% 98% at 50% 44%, transparent 46%, rgb(0 0 0 / 0.66) 100%);
 }

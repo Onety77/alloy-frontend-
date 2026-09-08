@@ -109,8 +109,15 @@ export function Backdrop() {
   return (
     <div className="backdrop" aria-hidden>
       <div className="backdrop__wall" />
-      <div className="backdrop__plate" />
-      <div className="backdrop__hearth" />
+      <div className="backdrop__columns" />
+      <div className="backdrop__alcove" />
+      <div className="backdrop__firelight" />
+      <div className="backdrop__shafts">
+        <div className="backdrop__shaft backdrop__shaft--a" />
+        <div className="backdrop__shaft backdrop__shaft--b" />
+        <div className="backdrop__shaft backdrop__shaft--c" />
+      </div>
+      <div className="backdrop__soot" />
       <canvas ref={ref} className="backdrop__embers" />
       <div className="backdrop__grain" />
       <div className="backdrop__vignette" />
