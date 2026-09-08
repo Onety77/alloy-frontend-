@@ -1,0 +1,42 @@
+.dial { position: relative; width: 100%; user-select: none; }
+.dial__svg { display: block; width: 100%; height: auto; overflow: visible; }
+
+/* Needle springs to its reading, then settles. */
+.dial__needle {
+  transition: rotate 0.9s var(--ease-anvil);
+  transform-box: view-box;
+}
+.dial__tick { transition: opacity 0.45s var(--ease-out); }
+
+/* Sits above the arc: a needle sweeping under type is unreadable. */
+.dial__readout {
+  text-align: center;
+  margin-bottom: 2px;
+  pointer-events: none;
+}
+.dial__value {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  line-height: 1;
+}
+.dial__caption {
+  margin-top: 9px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  color: var(--ink-400);
+}
+.dial__ends {
+  display: flex;
+  justify-content: space-between;
+  margin-top: -6px;
+  padding: 0 2px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+}
