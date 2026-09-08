@@ -1,0 +1,123 @@
+.smithy { display: flex; flex-direction: column; gap: 14px; }
+.smithy__cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+.smithy__section { display: flex; flex-direction: column; gap: 11px; padding: 13px 13px 15px; }
+
+/* --- shard vault ----------------------------------------------- */
+.vault { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 15px 16px; }
+.vault__figure { display: flex; flex-direction: column; gap: 2px; }
+.vault__label { font-size: 10px; letter-spacing: var(--track-wide); text-transform: uppercase; color: var(--ink-500); }
+.vault__amount {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--frost-100);
+  text-shadow: 0 0 26px rgb(90 174 214 / 0.45);
+}
+.vault__unit { font-family: var(--font-ui); font-size: 13px; letter-spacing: var(--track-wide); text-transform: uppercase; color: var(--ink-400); }
+.vault__rate { font-family: var(--font-mono); font-size: 12px; color: var(--ink-300); }
+.vault__warn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--ember-100);
+}
+
+/* --- slots ------------------------------------------------------ */
+.slots-grid {
+  display: grid;
+  /* Cap the track so three slots on a wide bench stay card-sized rather
+     than stretching into billboards. */
+  grid-template-columns: repeat(auto-fill, minmax(186px, 232px));
+  justify-content: start;
+  gap: 11px;
+}
+
+.forge-slot {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 216px;
+  padding: 14px 11px;
+  border-radius: var(--r-md);
+  background: var(--plate-sunk);
+  box-shadow: var(--bevel-down), inset 0 0 0 1px rgb(184 147 79 / 0.16);
+  color: var(--ink-500);
+  transition: box-shadow 0.24s var(--ease-out), color 0.24s var(--ease-out);
+}
+.forge-slot:hover { color: var(--brass-300); box-shadow: var(--bevel-down), inset 0 0 0 1px rgb(212 178 113 / 0.45); }
+.forge-slot__hint { font-size: 10.5px; letter-spacing: var(--track-wide); text-transform: uppercase; }
+.forge-slot__num {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ink-500);
+}
+.forge-slot--locked { opacity: 0.45; }
+.forge-slot--locked:hover { color: var(--ink-500); box-shadow: var(--bevel-down), inset 0 0 0 1px rgb(184 147 79 / 0.16); }
+
+.slot-filled { position: relative; }
+.slot-filled__rate {
+  position: absolute;
+  top: -7px;
+  right: -6px;
+  z-index: 3;
+  padding: 3px 8px;
+  border-radius: 99px;
+  background: linear-gradient(180deg, var(--frost-300), var(--frost-500));
+  color: #06131a;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.6);
+}
+
+/* --- expeditions ------------------------------------------------ */
+.route {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 12px;
+  border-radius: var(--r-md);
+  background: linear-gradient(180deg, rgb(40 40 50 / 0.5), rgb(17 17 22 / 0.6));
+  box-shadow: var(--bevel-up);
+}
+.route__head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.route__name { font-family: var(--font-display); font-size: 15px; color: var(--brass-200); }
+.route__time { font-family: var(--font-mono); font-size: 11px; color: var(--ink-400); }
+.route__blurb { font-size: 11.5px; line-height: 1.45; color: var(--ink-400); }
+.route__foot { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.route__reward { display: flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-200); }
+.route__progress { display: flex; flex-direction: column; gap: 5px; }
+.route__odds { font-family: var(--font-mono); font-size: 11px; color: var(--ink-300); }
+
+/* --- raids ------------------------------------------------------ */
+.rival {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 11px;
+  padding: 10px 12px;
+  border-radius: var(--r-sm);
+  background: linear-gradient(180deg, rgb(40 40 50 / 0.45), rgb(17 17 22 / 0.55));
+  box-shadow: var(--bevel-up);
+}
+.rival--spent { opacity: 0.42; }
+.rival__handle { font-family: var(--font-mono); font-size: 13px; color: var(--ink-100); }
+.rival__meta { font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-500); }
+.rival__exposed { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; }
+.rival__amount { font-family: var(--font-mono); font-size: 13px; color: var(--frost-100); }
+.rival__label { font-size: 8.5px; letter-spacing: var(--track-wide); text-transform: uppercase; color: var(--ink-500); }
+
+@media (max-width: 1060px) {
+  .smithy__cols { grid-template-columns: minmax(0, 1fr); }
+}

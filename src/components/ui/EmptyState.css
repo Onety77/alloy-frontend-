@@ -1,0 +1,26 @@
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 11px;
+  padding: 54px 24px;
+  text-align: center;
+}
+.empty__mark {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  color: var(--brass-600);
+  background: var(--plate-sunk);
+  box-shadow: var(--bevel-down), inset 0 0 0 1px rgb(184 147 79 / 0.2);
+}
+.empty__title {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--brass-200);
+}
+.empty__body { font-size: 12.5px; color: var(--ink-400); max-width: 46ch; }

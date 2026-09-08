@@ -2,7 +2,7 @@ import type { Alloy, Quote } from '@/lib/types'
 import { metalById } from '@/lib/metals'
 import { RARITIES, lockedValue, redeemValue } from '@/lib/rarity'
 import { AlloyIngot } from './AlloyIngot'
-import { usd } from '@/lib/format'
+import { pct, usd } from '@/lib/format'
 import './AlloyCard.css'
 
 function Stat({ name, value, color }: { name: string; value: number; color: string }) {
@@ -36,8 +36,9 @@ export function AlloyCard({
   const rarity = RARITIES[alloy.rarity]!
   const locked = lockedValue(alloy)
   const redeem = redeemValue(alloy, quotes)
-  // Mark-to-market against what was escrowed, after the melt cut.
-  const delta = redeem - locked * 0.9
+  // How far the underlying has moved since it was escrowed. The 10% melt cut
+  // is constant, so comparing against locked * 0.9 isolates the market move.
+  const movePct = locked > 0 ? (redeem / (locked * 0.9) - 1) * 100 : 0
   const metals = alloy.components.map((c) => metalById(c.metalId))
 
   const Wrapper = onClick ? 'button' : 'div'
@@ -88,10 +89,14 @@ export function AlloyCard({
         </span>
         <span className="alloy__metric" style={{ alignItems: 'flex-end' }}>
           <span className="alloy__metric-label">Melt value</span>
-          <span
-            className={`alloy__metric-value${delta >= 0 ? ' alloy__metric-value--gain' : ' alloy__metric-value--loss'}`}
-          >
-            {usd(redeem)}
+          <span className="alloy__metric-value">
+            {usd(redeem)}{' '}
+            <span
+              className="alloy__delta"
+              style={{ color: movePct >= 0 ? 'var(--gain)' : 'var(--loss)' }}
+            >
+              {pct(movePct)}
+            </span>
           </span>
         </span>
       </div>

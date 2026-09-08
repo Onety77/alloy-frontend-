@@ -10,3 +10,4 @@ dist-ssr
 !.env.example
 shot.mjs
 flow.mjs
+seed.mjs

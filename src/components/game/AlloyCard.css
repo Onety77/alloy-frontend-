@@ -112,4 +112,20 @@
 .alloy__metric-value--gain { color: var(--gain); }
 .alloy__metric-value--loss { color: var(--loss); }
 
-.alloy__chips { position: relative; display: flex; flex-wrap: wrap; gap: 4px; }
+/* Reserved so a card with no chips still lines its stats and footer up with
+   its neighbours in the grid. */
+.alloy__chips {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-height: 19px;
+}
+.alloy__name {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.5em;
+}
+.alloy__delta { font-family: var(--font-mono); font-size: 9.5px; }
