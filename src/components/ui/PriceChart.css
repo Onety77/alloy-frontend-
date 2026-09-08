@@ -1,0 +1,24 @@
+.pchart { position: relative; width: 100%; }
+.pchart__svg { display: block; width: 100%; height: auto; overflow: visible; }
+.pchart__grid { stroke: rgb(255 255 255 / 0.06); stroke-width: 1; }
+.pchart__axis {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  fill: var(--ink-500);
+}
+.pchart__hit { fill: transparent; cursor: crosshair; }
+.pchart__crosshair { stroke: var(--brass-400); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0.65; }
+
+.pchart__tip {
+  position: absolute;
+  z-index: 4;
+  transform: translate(-50%, -128%);
+  padding: 6px 9px;
+  border-radius: var(--r-sm);
+  background: rgb(8 8 11 / 0.96);
+  box-shadow: 0 0 0 1px rgb(184 147 79 / 0.4), var(--lift-2);
+  pointer-events: none;
+  white-space: nowrap;
+}
+.pchart__tip-price { font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--ink-100); }
+.pchart__tip-move { font-family: var(--font-mono); font-size: 10.5px; }

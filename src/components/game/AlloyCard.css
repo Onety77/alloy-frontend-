@@ -94,8 +94,8 @@
 .alloy__stat { display: grid; grid-template-columns: 58px 1fr 26px; align-items: center; gap: 7px; }
 .alloy__stat-name { font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-500); }
 .alloy__stat-val { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-200); text-align: right; }
-.alloy__bar { height: 4px; border-radius: 99px; background: rgb(0 0 0 / 0.55); box-shadow: var(--bevel-down); overflow: hidden; }
-.alloy__bar-fill { height: 100%; border-radius: 99px; transition: width 0.5s var(--ease-out); }
+.alloy__bar { display: block; height: 4px; border-radius: 99px; background: rgb(0 0 0 / 0.55); box-shadow: var(--bevel-down); overflow: hidden; }
+.alloy__bar-fill { display: block; height: 100%; border-radius: 99px; transition: width 0.5s var(--ease-out); }
 
 .alloy__foot {
   position: relative;

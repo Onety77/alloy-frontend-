@@ -204,8 +204,11 @@
   text-shadow: 0 0 12px rgb(255 168 77 / 0.7);
 }
 
-/* --- METER ---------------------------------------------------- */
+/* --- METER ----------------------------------------------------
+   `display:block` is load-bearing: these are spans, and an inline box
+   ignores height and percentage width entirely. */
 .meter {
+  display: block;
   position: relative;
   height: 7px;
   border-radius: 99px;
@@ -214,6 +217,7 @@
   overflow: hidden;
 }
 .meter__fill {
+  display: block;
   height: 100%;
   border-radius: 99px;
   background: linear-gradient(90deg, var(--ember-400), var(--ember-200));

@@ -1,0 +1,106 @@
+.hall { display: flex; flex-direction: column; gap: 14px; }
+.hall__cols { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+.hall__section { display: flex; flex-direction: column; gap: 11px; padding: 14px 13px; }
+
+/* --- season plate ----------------------------------------------- */
+.season { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; padding: 18px 20px; }
+.season__id { display: flex; flex-direction: column; gap: 2px; }
+.season__no { font-size: 10px; letter-spacing: var(--track-wider); text-transform: uppercase; color: var(--brass-400); }
+.season__name {
+  font-family: var(--font-display);
+  font-size: 27px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  background: linear-gradient(180deg, var(--brass-100), var(--brass-300) 55%, var(--brass-600));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 1px 0 rgb(0 0 0 / 0.9));
+}
+.season__purse { display: flex; flex-direction: column; gap: 2px; }
+.season__purse-label { font-size: 9.5px; letter-spacing: var(--track-wide); text-transform: uppercase; color: var(--ink-500); }
+.season__purse-value {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--arcane-300);
+  text-shadow: 0 0 26px rgb(169 139 240 / 0.4);
+}
+.season__purse-unit { font-family: var(--font-ui); font-size: 13px; letter-spacing: var(--track-wide); color: var(--ink-400); }
+
+/* --- ladder ------------------------------------------------------ */
+.ladder { display: flex; flex-direction: column; gap: 3px; }
+.ladder__head,
+.ladder__row {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 74px 74px 88px;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 11px;
+  border-radius: var(--r-sm);
+}
+.ladder__head {
+  font-size: 9px;
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  color: var(--ink-500);
+  padding-bottom: 4px;
+}
+.ladder__row { background: rgb(255 255 255 / 0.015); transition: background 0.18s var(--ease-out); }
+.ladder__row:hover { background: rgb(212 178 113 / 0.07); }
+
+.ladder__rank { font-family: var(--font-mono); font-size: 13px; color: var(--ink-400); }
+.ladder__handle { font-family: var(--font-mono); font-size: 13px; color: var(--ink-100); overflow: hidden; text-overflow: ellipsis; }
+.ladder__num { font-family: var(--font-mono); font-size: 12px; color: var(--ink-300); text-align: right; }
+.ladder__payout { font-family: var(--font-mono); font-size: 12.5px; color: var(--arcane-300); text-align: right; }
+
+/* Podium ranks wear metal. */
+.ladder__row--1 { background: linear-gradient(90deg, rgb(240 181 66 / 0.16), transparent 62%); box-shadow: inset 0 0 0 1px rgb(240 181 66 / 0.32); }
+.ladder__row--2 { background: linear-gradient(90deg, rgb(200 205 215 / 0.12), transparent 62%); box-shadow: inset 0 0 0 1px rgb(200 205 215 / 0.24); }
+.ladder__row--3 { background: linear-gradient(90deg, rgb(196 121 62 / 0.14), transparent 62%); box-shadow: inset 0 0 0 1px rgb(196 121 62 / 0.28); }
+.ladder__row--1 .ladder__rank { color: var(--r-mythril); }
+.ladder__row--2 .ladder__rank { color: #c8cdd7; }
+.ladder__row--3 .ladder__rank { color: #c4793e; }
+
+.ladder__row--you {
+  background: linear-gradient(90deg, rgb(242 81 11 / 0.2), rgb(242 81 11 / 0.04) 70%);
+  box-shadow: inset 0 0 0 1px rgb(212 178 113 / 0.55);
+}
+.ladder__row--you .ladder__handle { color: var(--ember-100); }
+.ladder__you-tag {
+  margin-left: 7px;
+  padding: 1px 6px;
+  border-radius: 99px;
+  background: var(--ember-400);
+  color: var(--core);
+  font-family: var(--font-ui);
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+}
+
+/* --- payout curve ------------------------------------------------ */
+.payout { display: flex; flex-direction: column; gap: 8px; }
+.payout__row { display: grid; grid-template-columns: 30px minmax(0, 1fr) 62px; align-items: center; gap: 9px; }
+.payout__rank { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-500); }
+.payout__track { display: block; height: 9px; border-radius: 99px; background: rgb(0 0 0 / 0.5); box-shadow: var(--bevel-down); overflow: hidden; }
+/* Rounded data-end anchored to the baseline. */
+.payout__fill {
+  display: block;
+  height: 100%;
+  border-radius: 0 4px 4px 0;
+  background: linear-gradient(90deg, var(--arcane-500), var(--arcane-300));
+  transition: width 0.5s var(--ease-out);
+}
+.payout__value { font-family: var(--font-mono); font-size: 11px; color: var(--ink-200); text-align: right; }
+
+@media (max-width: 1060px) { .hall__cols { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 640px) {
+  .ladder__head, .ladder__row { grid-template-columns: 34px minmax(0, 1fr) 70px; }
+  .ladder__num { display: none; }
+}

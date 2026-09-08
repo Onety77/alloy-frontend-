@@ -1,0 +1,59 @@
+.research { display: flex; flex-direction: column; gap: 14px; }
+.research__branches { display: grid; grid-template-columns: repeat(auto-fit, minmax(268px, 1fr)); gap: 13px; align-items: start; }
+.branch { display: flex; flex-direction: column; gap: 10px; padding: 14px 13px; }
+.branch__head { display: flex; flex-direction: column; gap: 3px; }
+.branch__name {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  color: var(--branch);
+}
+.branch__blurb { font-size: 11.5px; line-height: 1.45; color: var(--ink-400); }
+
+.node {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 11px 12px;
+  border-radius: var(--r-sm);
+  text-align: left;
+  background: linear-gradient(180deg, rgb(40 40 50 / 0.5), rgb(17 17 22 / 0.6));
+  box-shadow: var(--bevel-up);
+  transition: box-shadow 0.22s var(--ease-out), transform 0.18s var(--ease-out);
+}
+.node--available:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--bevel-up), var(--lift-1), inset 0 0 0 1px color-mix(in srgb, var(--branch) 45%, transparent);
+}
+.node--maxed { box-shadow: var(--bevel-up), inset 0 0 0 1px color-mix(in srgb, var(--branch) 55%, transparent); }
+.node--locked { opacity: 0.42; }
+
+.node__head { display: flex; align-items: center; justify-content: space-between; gap: 9px; }
+.node__name { font-family: var(--font-display); font-size: 13.5px; color: var(--ink-100); }
+.node__pips { display: flex; gap: 3px; flex: none; }
+.node__pip {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgb(0 0 0 / 0.6);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.12);
+}
+.node__pip--on {
+  background: var(--branch);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--branch) 70%, transparent);
+}
+.node__desc { font-size: 11px; line-height: 1.45; color: var(--ink-400); }
+.node__foot { display: flex; align-items: center; justify-content: space-between; gap: 9px; }
+.node__effect { font-family: var(--font-mono); font-size: 10.5px; color: var(--branch); }
+.node__cost { display: flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-300); }
+.node__cost--short { color: var(--loss); }
+.node__req { font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-500); }
+
+.research__standing {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(172px, 1fr));
+  gap: 8px;
+}
