@@ -1,0 +1,111 @@
+.arcane { display: flex; flex-direction: column; gap: 11px; padding: 13px 12px; }
+.arcane__block { display: flex; flex-direction: column; gap: 7px; }
+.arcane__dial { width: min(240px, 100%); margin: 0 auto; }
+.arcane__note { font-size: 11px; line-height: 1.4; text-align: center; color: var(--ink-400); }
+.arcane__note strong { color: var(--brass-200); font-weight: 600; }
+
+/* --- overclock lever ------------------------------------------- */
+.lever { display: flex; flex-direction: column; gap: 7px; }
+.lever__track {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 22px;
+  background: transparent;
+  cursor: grab;
+}
+.lever__track:active { cursor: grabbing; }
+.lever__track::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--frost-500) 0%, var(--brass-500) 42%, var(--ember-400) 74%, var(--ember-600) 100%);
+  box-shadow: var(--bevel-down);
+}
+.lever__track::-moz-range-track {
+  height: 8px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--frost-500) 0%, var(--brass-500) 42%, var(--ember-400) 74%, var(--ember-600) 100%);
+  box-shadow: var(--bevel-down);
+}
+.lever__track::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 19px;
+  height: 19px;
+  margin-top: -5.5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 30%, var(--brass-100), var(--brass-300) 38%, var(--brass-600) 78%, var(--brass-800));
+  box-shadow: 0 2px 5px rgb(0 0 0 / 0.85), 0 0 14px rgb(255 122 26 / 0.4);
+}
+.lever__track::-moz-range-thumb {
+  width: 19px;
+  height: 19px;
+  border: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 30%, var(--brass-100), var(--brass-300) 38%, var(--brass-600) 78%, var(--brass-800));
+  box-shadow: 0 2px 5px rgb(0 0 0 / 0.85), 0 0 14px rgb(255 122 26 / 0.4);
+}
+.lever__scale {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+}
+.lever__value { font-family: var(--font-mono); font-size: 12px; color: var(--brass-200); }
+.lever__cap { font-size: 9.5px; color: var(--ink-500); letter-spacing: 0.06em; }
+
+/* --- risk plate ------------------------------------------------ */
+.risk {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 9px 11px;
+  border-radius: var(--r-sm);
+  background: linear-gradient(180deg, rgb(60 16 10 / 0.5), rgb(26 8 6 / 0.6));
+  box-shadow: inset 0 0 0 1px rgb(214 69 47 / 0.32), var(--bevel-down);
+}
+.risk--safe {
+  background: linear-gradient(180deg, rgb(20 34 30 / 0.5), rgb(9 16 14 / 0.6));
+  box-shadow: inset 0 0 0 1px rgb(79 211 154 / 0.24), var(--bevel-down);
+}
+.risk__top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  color: var(--loss);
+}
+.risk--safe .risk__top { color: var(--gain); }
+.risk__value {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  color: var(--loss);
+}
+.risk--safe .risk__value { color: var(--gain); }
+.risk__foot { font-size: 9px; letter-spacing: var(--track-wide); text-transform: uppercase; color: var(--ink-500); }
+
+/* --- odds -------------------------------------------------------
+   Part-to-whole across six tiers. Segments are separated by a 2px
+   surface gap so adjacent fills never blend into one another. */
+.odds { display: flex; flex-direction: column; gap: 7px; }
+.odds__bar { display: flex; gap: 2px; height: 13px; border-radius: 2px; overflow: hidden; }
+.odds__seg { transition: flex-grow 0.6s var(--ease-out); min-width: 1px; }
+.odds__legend { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 12px; }
+.odds__row {
+  display: grid;
+  grid-template-columns: 9px 1fr auto;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+}
+.odds__swatch { width: 8px; height: 8px; border-radius: 2px; }
+.odds__name { color: var(--ink-300); }
+/* Values wear ink, never the series colour. */
+.odds__pct { font-family: var(--font-mono); font-size: 11px; color: var(--ink-200); }

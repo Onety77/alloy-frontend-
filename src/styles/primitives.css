@@ -242,13 +242,18 @@
 .tag--frost { color: var(--frost-100); box-shadow: inset 0 0 0 1px rgb(90 174 214 / 0.3); }
 .tag--ember { color: var(--ember-100); box-shadow: inset 0 0 0 1px rgb(255 168 77 / 0.32); }
 
-/* --- SCREEN LAYOUT -------------------------------------------- */
+/* --- SCREEN LAYOUT --------------------------------------------
+   `.screen` only owns entrance and height. It deliberately sets no
+   `display`, so a screen that wants grid is not fighting a flex rule
+   of equal specificity whose winner depends on stylesheet order. */
 .screen {
+  min-height: 100%;
+  animation: forge-rise 0.4s var(--ease-out) both;
+}
+.screen--stack {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  min-height: 100%;
-  animation: forge-rise 0.4s var(--ease-out) both;
 }
 .stack { display: flex; flex-direction: column; }
 .row { display: flex; align-items: center; }

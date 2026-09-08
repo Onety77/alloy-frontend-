@@ -15,6 +15,20 @@ export interface Metal {
   hue: string
   /** Specular highlight rolled across the ingot face. */
   sheen: string
+  /**
+   * Chart-line variant of the body colour.
+   *
+   * Ingot colours are object colours: Applium is silver and Palantirium is
+   * graphite because that is what those metals *are*. Both read as gray on a
+   * chart and fall under 3:1 against the panel, so plots use these brightened
+   * variants instead. Every one clears the contrast floor.
+   *
+   * Six of these cannot all separate under protanopia — blue and violet
+   * collapse — so the market board never overlays them. It draws small
+   * multiples, one metal per labelled row, plus a single-series detail chart.
+   * Identity comes from the label; hue is decorative.
+   */
+  line: string
   /** One-line flavour describing what the metal contributes to an alloy. */
   trait: string
   /** Which alloy stat this metal biases when it dominates a melt. */

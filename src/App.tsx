@@ -1,21 +1,34 @@
-import { Dial } from '@/components/ui/Dial'
-import { Panel, SectionHeading } from '@/components/ui/Panel'
-import { Button } from '@/components/ui/Button'
+import { useGame } from '@/state/store'
+import { useMarketClock } from '@/state/useMarketClock'
+import { AppShell } from '@/components/layout/AppShell'
+import { ForgeScreen } from '@/screens/ForgeScreen'
 
-export function App() {
+function Placeholder({ name }: { name: string }) {
   return (
-    <div style={{ padding: 40, display: 'grid', gap: 20, maxWidth: 420 }}>
-      <Panel rivets style={{ padding: 16 }}>
-        <SectionHeading>Market Temperature</SectionHeading>
-        <Dial
-          value={0.5}
-          stops={['#5aaed6', '#b8934f', '#f2510b']}
-          readout="NEUTRAL"
-          caption="Pick metals to read the market"
-          endLabels={['Cold', 'Hot']}
-        />
-        <Button tone="ember" block>Craft</Button>
-      </Panel>
+    <div className="screen">
+      <div className="panel" style={{ padding: 40, textAlign: 'center' }}>
+        <h2>{name}</h2>
+      </div>
     </div>
   )
+}
+
+export function App() {
+  useMarketClock()
+  const screen = useGame((s) => s.screen)
+
+  switch (screen) {
+    case 'forge':
+      return (
+        <AppShell>
+          <ForgeScreen />
+        </AppShell>
+      )
+    default:
+      return (
+        <AppShell>
+          <Placeholder name={screen} />
+        </AppShell>
+      )
+  }
 }

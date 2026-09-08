@@ -1,0 +1,70 @@
+/* The room the interface sits in. Everything here is decorative and inert. */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 80% at 50% 118%, rgb(122 38 8 / 0.5) 0%, transparent 62%),
+    radial-gradient(90% 60% at 50% -10%, rgb(40 34 52 / 0.55) 0%, transparent 70%),
+    linear-gradient(180deg, #0a0a0e 0%, #08080b 45%, #050506 100%);
+}
+
+/* Far wall. The optional generated plate lands on top of this and inherits
+   the same mask, so the composition holds either way. */
+.backdrop__wall {
+  position: absolute;
+  inset: 0;
+  background-image: var(--tx-scorch), var(--tx-iron);
+  background-size: 900px 900px, 320px 320px;
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+}
+.backdrop__plate {
+  position: absolute;
+  inset: 0;
+  background-image: var(--tx-plate, none);
+  background-size: cover;
+  background-position: center;
+  opacity: 0.32;
+  mix-blend-mode: soft-light;
+}
+
+/* The forge itself, glowing off the bottom edge of the room. */
+.backdrop__hearth {
+  position: absolute;
+  left: 50%;
+  bottom: -22vh;
+  width: min(1500px, 130vw);
+  height: 62vh;
+  translate: -50% 0;
+  background: radial-gradient(
+    closest-side,
+    rgb(255 168 77 / 0.34) 0%,
+    rgb(242 81 11 / 0.2) 38%,
+    rgb(124 31 8 / 0.09) 62%,
+    transparent 78%
+  );
+  filter: blur(14px);
+  animation: forge-flicker 7s ease-in-out infinite;
+}
+
+.backdrop__embers { position: absolute; inset: 0; }
+
+/* Grain over the whole room, last, so nothing escapes it. */
+.backdrop__grain {
+  position: absolute;
+  inset: 0;
+  background-image: var(--tx-grain);
+  background-size: 180px 180px;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+}
+
+/* Corner darkening keeps the eye on the middle third. */
+.backdrop__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 95% at 50% 45%, transparent 42%, rgb(0 0 0 / 0.72) 100%);
+}

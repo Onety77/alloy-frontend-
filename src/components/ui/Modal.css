@@ -1,0 +1,61 @@
+.modal__scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgb(4 4 6 / 0.82);
+  backdrop-filter: blur(7px);
+}
+.modal__panel {
+  position: relative;
+  width: 100%;
+  max-height: calc(100dvh - 40px);
+  overflow-y: auto;
+  border-radius: var(--r-lg);
+  background: var(--plate);
+  box-shadow: var(--bevel-up), var(--lift-3);
+}
+.modal__panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: var(--tx-iron), var(--tx-scorch);
+  background-size: 260px 260px, 700px 700px;
+  opacity: 0.42;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+.modal__panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--brass-edge);
+  opacity: 0.6;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+.modal__close {
+  position: absolute;
+  top: 11px;
+  right: 11px;
+  z-index: 3;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--ink-400);
+  background: rgb(0 0 0 / 0.4);
+  box-shadow: inset 0 0 0 1px rgb(184 147 79 / 0.28);
+  transition: color 0.2s var(--ease-out), background 0.2s var(--ease-out);
+}
+.modal__close:hover { color: var(--ink-100); background: rgb(0 0 0 / 0.7); }
+.modal__body { position: relative; z-index: 2; padding: 20px; }
