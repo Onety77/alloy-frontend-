@@ -24,7 +24,4 @@ export function gaussian(rng: Rng): number {
 export const pick = <T,>(items: readonly T[], rng: Rng): T =>
   items[Math.floor(rng() * items.length)] ?? items[0]!
 
-export const randInt = (min: number, max: number, rng: Rng): number =>
-  min + Math.floor(rng() * (max - min + 1))
-
 export const clamp = (n: number, min: number, max: number) => (n < min ? min : n > max ? max : n)

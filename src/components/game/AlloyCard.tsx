@@ -1,6 +1,7 @@
 import type { Alloy, Quote } from '@/lib/types'
 import { metalById } from '@/lib/metals'
 import { RARITIES, lockedValue, redeemValue } from '@/lib/rarity'
+import { usePerks } from '@/state/selectors'
 import { AlloyIngot } from './AlloyIngot'
 import { pct, usd } from '@/lib/format'
 import './AlloyCard.css'
@@ -33,6 +34,7 @@ export function AlloyCard({
   onClick?: () => void
   footer?: React.ReactNode
 }) {
+  const perks = usePerks()
   const rarity = RARITIES[alloy.rarity]!
   const locked = lockedValue(alloy)
   const redeem = redeemValue(alloy, quotes)
@@ -91,12 +93,14 @@ export function AlloyCard({
           <span className="alloy__metric-label">Melt value</span>
           <span className="alloy__metric-value">
             {usd(redeem)}{' '}
-            <span
-              className="alloy__delta"
-              style={{ color: movePct >= 0 ? 'var(--gain)' : 'var(--loss)' }}
-            >
-              {pct(movePct)}
-            </span>
+            {perks.showRedeemDelta && (
+              <span
+                className="alloy__delta"
+                style={{ color: movePct >= 0 ? 'var(--gain)' : 'var(--loss)' }}
+              >
+                {pct(movePct)}
+              </span>
+            )}
           </span>
         </span>
       </div>

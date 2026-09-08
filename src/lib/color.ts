@@ -33,8 +33,3 @@ export function ramp(stops: string[], t: number): string {
   const i = Math.min(Math.floor(k), stops.length - 2)
   return mix(stops[i]!, stops[i + 1]!, k - i)
 }
-
-export function withAlpha(hex: string, alpha: number): string {
-  const [r, g, b] = hexToRgb(hex)
-  return `rgb(${r} ${g} ${b} / ${clamp01(alpha)})`
-}

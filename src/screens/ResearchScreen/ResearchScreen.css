@@ -57,3 +57,14 @@
   grid-template-columns: repeat(auto-fit, minmax(172px, 1fr));
   gap: 8px;
 }
+
+.research__reset {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+  padding-top: 11px;
+  border-top: 1px solid rgb(184 147 79 / 0.16);
+}

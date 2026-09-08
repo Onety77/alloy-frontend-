@@ -42,11 +42,16 @@ export function BottomNav() {
             className={`nav__item${active ? ' nav__item--active' : ''}`}
             onClick={() => setScreen(tab.id)}
             aria-current={active ? 'page' : undefined}
+            /* The visible label is hidden on narrow viewports, so the name has
+               to come from here or the tab becomes an unlabelled icon. */
+            aria-label={tab.label}
           >
             <Icon name={tab.icon} size={21} />
             <span className="nav__label">{tab.label}</span>
             {badge > 0 && (
-              <span className="nav__badge">{badge > 99 ? '99+' : badge}</span>
+              <span className="nav__badge" aria-hidden>
+                {badge > 99 ? '99+' : badge}
+              </span>
             )}
           </button>
         )

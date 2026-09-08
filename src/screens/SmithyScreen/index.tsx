@@ -59,6 +59,7 @@ export function SmithyScreen() {
         <Figure label="Slots" value={`${slotted.length}/${perks.slots}`} />
         <Figure label="Draw" value={`${perDay.toFixed(1)}/day`} tone="brass" />
         <Figure label="Cinder" value={String(cinder)} />
+        <Figure label="Your defence" value={String(42 + perks.raidDefence)} />
       </ScreenHeader>
 
       <Panel rivets className="vault">

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useGame } from '@/state/store'
 import { usePerks } from '@/state/selectors'
 import {
@@ -8,6 +9,7 @@ import {
 } from '@/state/content'
 import { Panel } from '@/components/ui/Panel'
 import { Icon } from '@/components/ui/Icon'
+import { Button } from '@/components/ui/Button'
 import { ScreenHeader, Figure } from '@/components/layout/ScreenHeader'
 import { compact } from '@/lib/format'
 import './ResearchScreen.css'
@@ -18,7 +20,9 @@ export function ResearchScreen() {
   const research = useGame((s) => s.research)
   const shards = useGame((s) => s.wallet.shards)
   const buy = useGame((s) => s.buyResearch)
+  const resetBench = useGame((s) => s.resetBench)
   const perks = usePerks()
+  const [confirmReset, setConfirmReset] = useState(false)
 
   const invested = RESEARCH_NODES.reduce((sum, node) => {
     const level = research[node.id] ?? 0
@@ -147,6 +151,33 @@ export function ResearchScreen() {
             <span className="stat-row__label">Claim bonus</span>
             <span className="stat-row__value">+{(perks.claimBonus * 100).toFixed(0)}%</span>
           </div>
+        </div>
+
+        <div className="research__reset">
+          <span className="branch__blurb">
+            Clears every ingot, balance and research level on this device.
+          </span>
+          {confirmReset ? (
+            <div style={{ display: 'flex', gap: 8 }}>
+              <Button size="sm" tone="ghost" onClick={() => setConfirmReset(false)}>
+                Cancel
+              </Button>
+              <Button
+                size="sm"
+                tone="danger"
+                onClick={() => {
+                  resetBench()
+                  setConfirmReset(false)
+                }}
+              >
+                Confirm reset
+              </Button>
+            </div>
+          ) : (
+            <Button size="sm" tone="ghost" onClick={() => setConfirmReset(true)}>
+              Reset bench
+            </Button>
+          )}
         </div>
       </Panel>
     </div>

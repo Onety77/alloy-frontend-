@@ -4,9 +4,12 @@ import { persist, createJSONStorage } from 'zustand/middleware'
 import type { Alloy, Quote, ScreenId } from '@/lib/types'
 import { activeMetals, isColdForgeWindow, metalById } from '@/lib/metals'
 import {
+  coldYieldBonus,
   forgeAlloy,
+  rarityOdds,
   readForge,
   redeemValue,
+  temperatureLabel,
   RARITIES,
   RARITY_ORDER,
   type ForgeReading,
@@ -84,7 +87,6 @@ interface GameState {
   /* --- wallet ------------------------------------------------- */
   wallet: Wallet
   connect: () => void
-  disconnect: () => void
 
   /* --- smithy ------------------------------------------------- */
   unclaimed: number
@@ -116,7 +118,6 @@ interface GameState {
   screen: ScreenId
   setScreen: (screen: ScreenId) => void
   log: LogEntry[]
-  pushLog: (text: string, tone?: LogTone) => void
   resetBench: () => void
 }
 
@@ -185,10 +186,20 @@ export function computeReading(
     overclock,
     coldWindow,
   })
+
+  // Heat Retention shifts the effective tape, so re-derive everything that
+  // depends on temperature rather than only relabelling the gauge.
+  const temperature = clamp(base.temperature + perks.temperatureBonus, -1, 1)
+  const odds = rarityOdds(temperature, overclock, band)
+
   return {
     ...base,
+    temperature,
+    label: temperatureLabel(temperature),
+    heat: (temperature + 1) / 2,
+    odds,
     crackRisk: Math.max(0, base.crackRisk - perks.crackReduction),
-    coldBonus: base.coldBonus * perks.coldYieldBonus,
+    coldBonus: coldYieldBonus(temperature) * perks.coldYieldBonus,
   }
 }
 
@@ -330,7 +341,6 @@ export const useGame = create<GameState>()(
           wallet: { ...s.wallet, connected: true },
           log: [logEntry('Bench connected to Robinhood Chain.', 'good'), ...s.log].slice(0, MAX_LOG),
         })),
-      disconnect: () => set((s) => ({ wallet: { ...s.wallet, connected: false } })),
 
       /* ---------------------------------------------------------- */
       unclaimed: 0,
@@ -565,8 +575,6 @@ export const useGame = create<GameState>()(
       screen: 'forge',
       setScreen: (screen) => set({ screen }),
       log: [],
-      pushLog: (text, tone = 'neutral') =>
-        set((s) => ({ log: [logEntry(text, tone), ...s.log].slice(0, MAX_LOG) })),
 
       resetBench: () =>
         set({

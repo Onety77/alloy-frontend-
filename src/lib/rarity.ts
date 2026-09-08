@@ -271,5 +271,3 @@ export function redeemValue(alloy: Alloy, quotes: Record<string, Quote>): number
   }, 0)
   return marked * 0.9
 }
-
-export const MELT_RETURN_RATE = 0.9
