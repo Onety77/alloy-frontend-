@@ -1,0 +1,108 @@
+/* ============================================================
+   FORGE — design tokens
+   A single molten palette. Every surface is iron; every accent
+   is either brass (wrought), ember (molten) or oracle (data).
+   ============================================================ */
+:root {
+  /* --- substrate: cold iron ------------------------------- */
+  --void: #06060889;
+  --iron-950: #08080b;
+  --iron-900: #0d0d11;
+  --iron-850: #121218;
+  --iron-800: #17171e;
+  --iron-750: #1c1c24;
+  --iron-700: #23232c;
+  --iron-600: #2e2e39;
+  --iron-500: #3d3d4a;
+  --iron-400: #55556410;
+
+  /* --- brass: every frame, rule and rivet ----------------- */
+  --brass-100: #f6e6c0;
+  --brass-200: #e8d09a;
+  --brass-300: #d4b271;
+  --brass-400: #b8934f;
+  --brass-500: #96733a;
+  --brass-600: #6f5429;
+  --brass-700: #4a381b;
+  --brass-800: #2c2011;
+
+  /* --- ember: heat, crucible, calls to action ------------- */
+  --core: #fff4d2;
+  --ember-100: #ffd08a;
+  --ember-200: #ffa94d;
+  --ember-300: #ff7a1a;
+  --ember-400: #f2510b;
+  --ember-500: #c2340a;
+  --ember-600: #7d1f08;
+
+  /* --- oracle: market signal ------------------------------ */
+  --gain: #4fd39a;
+  --gain-dim: #2a7f5e;
+  --loss: #f2604f;
+  --loss-dim: #8f3128;
+  --frost-100: #bfe4f7;
+  --frost-300: #5aaed6;
+  --frost-500: #2b6d8f;
+  --arcane-300: #a98bf0;
+  --arcane-500: #6b4fb5;
+
+  /* --- ink ------------------------------------------------ */
+  --ink-100: #f4ece0;
+  --ink-200: #d9cdba;
+  --ink-300: #ab9f8d;
+  --ink-400: #7d7466;
+  --ink-500: #57514a;
+
+  /* --- rarity --------------------------------------------- */
+  --r-dross: #8b8d93;
+  --r-tempered: #7fc98a;
+  --r-runed: #59a8e0;
+  --r-ascendant: #a481ef;
+  --r-mythril: #f0b542;
+  --r-singularity: #fff3d4;
+
+  /* --- type ----------------------------------------------- */
+  --font-display: 'Cinzel', 'Trajan Pro', Georgia, serif;
+  --font-ui: 'Barlow Semi Condensed', 'Oswald', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --track-wide: 0.18em;
+  --track-wider: 0.3em;
+
+  /* --- rhythm --------------------------------------------- */
+  --r-sm: 3px;
+  --r-md: 5px;
+  --r-lg: 8px;
+
+  /* --- light model: one key light, high and slightly left -- */
+  --bevel-up: inset 0 1px 0 rgb(255 236 200 / 0.14),
+              inset 0 -1px 0 rgb(0 0 0 / 0.6),
+              inset 1px 0 0 rgb(255 236 200 / 0.04),
+              inset -1px 0 0 rgb(0 0 0 / 0.35);
+  --bevel-down: inset 0 1px 3px rgb(0 0 0 / 0.85),
+                inset 0 -1px 0 rgb(255 236 200 / 0.06);
+  --lift-1: 0 1px 2px rgb(0 0 0 / 0.5), 0 4px 12px rgb(0 0 0 / 0.45);
+  --lift-2: 0 2px 4px rgb(0 0 0 / 0.5), 0 12px 34px rgb(0 0 0 / 0.6);
+  --lift-3: 0 6px 12px rgb(0 0 0 / 0.55), 0 30px 80px rgb(0 0 0 / 0.7);
+
+  --glow-ember: 0 0 18px rgb(255 122 26 / 0.35), 0 0 52px rgb(242 81 11 / 0.22);
+  --glow-brass: 0 0 12px rgb(212 178 113 / 0.28);
+
+  /* --- surfaces ------------------------------------------- */
+  --plate: linear-gradient(178deg, #23232c 0%, #191920 42%, #131319 100%);
+  --plate-raised: linear-gradient(178deg, #2f2f3a 0%, #212129 55%, #17171d 100%);
+  --plate-sunk: linear-gradient(178deg, #0c0c10 0%, #131318 100%);
+  --brass-rule: linear-gradient(
+    90deg,
+    transparent,
+    var(--brass-700) 12%,
+    var(--brass-300) 50%,
+    var(--brass-700) 88%,
+    transparent
+  );
+  --brass-edge: linear-gradient(160deg, var(--brass-200), var(--brass-500) 40%, var(--brass-700) 70%, var(--brass-400));
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-anvil: cubic-bezier(0.2, 1.6, 0.4, 1);
+}
